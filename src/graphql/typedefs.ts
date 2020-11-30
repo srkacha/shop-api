@@ -24,6 +24,7 @@ export default gql`
         getShops: [Shop]
         getShop(id: ID!): Shop
         getProducts(shopId: ID!): [Product]
+        getProductsByPage(shopId: ID!, page: Int!, pageSize: Int!): [Product]
     }
 
     type Mutation {

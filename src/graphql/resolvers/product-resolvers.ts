@@ -5,7 +5,19 @@ export default {
         async getProducts(parent, {shopId}, context, info){
             try{
                 const products = await Product.find({shopId});
-                
+
+                return products;
+            }catch(err){
+                //LOG
+                throw new Error(err);
+            }
+        },
+        async getProductsByPage(parent, {shopId, page, pageSize}, context, info){
+            try{
+                const skip = page * pageSize;
+                const limit = pageSize;
+                const products = await Product.find({shopId}, {}, {skip, limit});
+
                 return products;
             }catch(err){
                 //LOG
