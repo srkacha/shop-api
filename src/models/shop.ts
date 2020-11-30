@@ -3,7 +3,9 @@ import { model, Schema} from 'mongoose';
 const shopSchema = new Schema({
     name: {
         type: String, 
-        required: true
+        required: true,
+        minlength: 1,
+        maxlength: 255
     },
     createdAt: {
         type: Date, 

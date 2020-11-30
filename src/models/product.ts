@@ -3,11 +3,14 @@ import { model, Schema } from 'mongoose';
 const productSchema = new Schema({
     name:{
         type: String,
-        required: true
+        required: true,
+        minlength: 1,
+        maxlength: 255
     },
     price:{
         type: Number,
-        required: true
+        required: true,
+        min: 0
     },
     createdAt: {
         type: Date, 
