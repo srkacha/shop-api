@@ -1,27 +1,23 @@
-import { FileWatcherEventKind } from 'typescript';
 import * as winston from 'winston';
 import { enviroment } from '../config/enviroment';
 
 const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
-    defaultMeta: { service: 'user-service' },
-    transports: [
-      //
-      // - Write all logs with level `error` and below to `error.log`
-      // - Write all logs with level `info` and below to `combined.log`
-      //
-    //   new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    //   new winston.transports.File({ filename: 'combined.log' }),
-    ],
+    defaultMeta: { service: 'user-service' }
   });
 
 // setting up the logger for production
+// logging error and info logs to separate files
 if ('production' === enviroment.nodeEnv){
     logger.add(new winston.transports.File({
-        filename: 'error.log',
-        level: 'error'
+        filename: enviroment.logger.logErrorPath,
+        level: 'error',
     }));
+    logger.add(new winston.transports.File({
+        filename: enviroment.logger.logInfoPath,
+        level: 'info',
+    }))
 }
 
 // setting up the logger for development

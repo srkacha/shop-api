@@ -3,6 +3,7 @@ import { enviroment } from './config/enviroment';
 import connectDatabase from './config/db';
 import resolvers from './graphql/resolvers';
 import typeDefs from './graphql/typedefs';
+import logger from './util/logger';
 
 // Creating an async fucntion to ensure the db is 
 // connected before we start the server 
@@ -20,7 +21,9 @@ const startApp = async () => {
 
     // Starting the listening process
     server.listen({ port: enviroment.port }).then(({url}) => {
-        console.log(`Server is up and running at ${url}`);
+        logger.log('info', `Server is up and running at ${url}`);
+    }).catch(err => {
+        logger.log('error', `Error starting the Apollo server`);
     });
 }
 

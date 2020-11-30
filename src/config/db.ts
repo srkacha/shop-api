@@ -1,6 +1,7 @@
 import { connect } from 'mongoose';
 import { enviroment } from './enviroment';
 import { sep } from 'path';
+import logger from '../util/logger';
 
 const URL = enviroment.mongoDb.url + sep + enviroment.mongoDb.dbName;  
 
@@ -12,10 +13,9 @@ const connectDatabase = async () => {
             useUnifiedTopology: true
         });
 
-        console.log('MongoDB is connected!');
+        logger.log('info', 'Mongo database connection created successfully.');
     }catch(error){
-        // TODO - replace this with logger
-        console.log(error);
+        logger.log('error', 'Error connecting to Mongo database.');
     }
 }
 

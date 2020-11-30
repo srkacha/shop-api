@@ -1,4 +1,5 @@
 import Shop from '../../models/shop';
+import logger from '../../util/logger';
 
 export default {
     Query: {
@@ -8,7 +9,7 @@ export default {
 
                 return shops;
             }catch(err){
-                //LOG
+                logger.log('error', 'Error retrieving shops.');
                 throw new Error(err);
             }
         },
@@ -18,7 +19,7 @@ export default {
 
                 return shop;
             }catch(err){
-                //LOG
+                logger.log('error', 'Error retrieving shop by ID.');
                 throw new Error(err);
             }
         }
@@ -30,7 +31,7 @@ export default {
 
                 return shop.save();
             }catch(err){
-                //LOG
+                logger.log('error', 'Error creating shop.');
                 throw new Error(err);
             }
         },
@@ -42,7 +43,7 @@ export default {
                 
                 return Shop.findOneAndUpdate(filter, update);
             }catch(err){
-                //LOG
+                logger.log('error', 'Error deleting shop.');
                 throw new Error(err);
             }
         },
@@ -55,7 +56,7 @@ export default {
 
                 return Shop.findByIdAndUpdate(id, {$set: fieldsToUpdate}, {new: true});
             }catch(err){
-                //LOG
+                logger.log('error', 'Error updating shop');
                 throw new Error(err);
             }
         }
