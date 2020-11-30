@@ -23,7 +23,7 @@ export const enviroment: Enviroment = {
         playground: process.env.APOLLO_PLAYGROUND === 'true'
     },
     mongoDb: {
-        dbName: process.env.MONGO_DB_NAME as string,
+        dbName: process.env.MONGODB_DB_NAME as string,
         url: process.env.MONGODB_URL as string
     },
     port: process.env.PORT || defaultPort

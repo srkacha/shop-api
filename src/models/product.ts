@@ -11,7 +11,8 @@ const productSchema = new Schema({
     },
     createdAt: {
         type: Date, 
-        required: true
+        required: true,
+        default: Date.now
     },
     deletedAt: {
         type: Date, 
