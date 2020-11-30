@@ -5,6 +5,7 @@ export default {
         async getShops() {
             try{
                 const shops = await Shop.find();
+
                 return shops;
             }catch(err){
                 //LOG
@@ -14,6 +15,7 @@ export default {
         async getShop(parent, {id}, context, info){
             try{
                 const shop = await Shop.findById(id);
+
                 return shop;
             }catch(err){
                 //LOG
@@ -25,6 +27,7 @@ export default {
         async createShop(parent, {name}, context, info){
             try{
                 const shop = await new Shop({name});
+
                 return shop.save();
             }catch(err){
                 //LOG
@@ -36,6 +39,7 @@ export default {
                 const filter = {_id: id};
                 const deletedAt = Date.now();
                 const update = {deletedAt};
+                
                 return Shop.findOneAndUpdate(filter, update);
             }catch(err){
                 //LOG
@@ -44,7 +48,11 @@ export default {
         },
         async updateShop(parent, {id, name}, context, info){
             try{
-                let fieldsToUpdate = {name};
+                let fieldsToUpdate = {};
+
+                //updating only the fields provided by the mutation
+                if(name) fieldsToUpdate["name"] = name;
+
                 return Shop.findByIdAndUpdate(id, {$set: fieldsToUpdate}, {new: true});
             }catch(err){
                 //LOG

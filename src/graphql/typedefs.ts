@@ -32,6 +32,6 @@ export default gql`
         updateShop(name: String!, id: ID!): Shop
         createProduct(name: String!, price: Float!, shopId: ID!): Product
         deleteProduct(id: ID!): Product
-        updateProduct(name: String!, price: Float!, id: ID!): Product
+        updateProduct(name: String, price: Float, id: ID!): Product
     }
 `;
