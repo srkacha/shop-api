@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const defaultPort = 4000;
+const defaultNodeEnv = 'development';
 
 interface Enviroment {
     apollo: {
@@ -15,6 +16,7 @@ interface Enviroment {
         url: string;
     },
     port: number | string;
+    nodeEnv: string;
 };
 
 export const enviroment: Enviroment = {
@@ -26,5 +28,6 @@ export const enviroment: Enviroment = {
         dbName: process.env.MONGODB_DB_NAME as string,
         url: process.env.MONGODB_URL as string
     },
-    port: process.env.PORT || defaultPort
+    port: process.env.PORT || defaultPort,
+    nodeEnv: process.env.NODE_ENV || defaultNodeEnv
 };
