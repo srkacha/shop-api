@@ -25,6 +25,7 @@ export default gql`
         getShop(id: ID!): Shop
         getProducts(shopId: ID!): [Product]
         getProductsByPage(shopId: ID!, page: Int!, pageSize: Int!): [Product]
+        filterProductsByPrice(shopId: ID!, from: Float, to: Float): [Product]
     }
 
     type Mutation {

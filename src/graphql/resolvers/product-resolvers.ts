@@ -23,6 +23,22 @@ export default {
                 //LOG
                 throw new Error(err);
             }
+        },
+        async filterProductsByPrice(parent, {shopId, from, to}, context, info){
+            try{
+                let limitQuery = {};
+
+                //generating the limit query for price filtering
+                if(from !== undefined) limitQuery["$gte"] = from;
+                if(to !== undefined) limitQuery["$lt"] = to;
+
+                const products = await Product.find({shopId, "price":limitQuery});
+                
+                return products;
+            }catch(err){
+                //LOG
+                throw new Error(err);
+            }
         }
     },
     Mutation: {
@@ -52,8 +68,8 @@ export default {
                 let fieldsToUpdate = {};
 
                 //updating only fields that are provided by the request
-                if(name) fieldsToUpdate["name"] = name;
-                if(price) fieldsToUpdate["price"] = price;
+                if(name !== undefined) fieldsToUpdate["name"] = name;
+                if(price !== undefined) fieldsToUpdate["price"] = price;
 
                 return Product.findByIdAndUpdate(id, {$set: fieldsToUpdate}, {new: true});
             }catch(err){
